@@ -5,9 +5,13 @@ services:
     container_name: omeka_apache_con
     build:
       context: ./apache
+      args:
+        - WEB_USER=${WEB_USER}
+        - WEB_GROUP=${WEB_GROUP}
         - APACHE_ROOT_DIR=${APACHE_ROOT_DIR}
     volumes:
-      - ../logs/apache:${APACHE_ROOT_DIR}/logs
+      - ./logs/apache:${APACHE_ROOT_DIR}/logs
+      - ./htdocs:${APACHE_ROOT_DIR}/htdocs
     ports:
       - ${APACHE_EXPOSED_PORT}:80
     networks:
@@ -51,14 +55,13 @@ services:
         - PHP_ROOT_DIR=${PHP_ROOT_DIR}
     working_dir: ${PHP_APP_DIR}
     volumes:
-      - ../htdocs:${PHP_APP_DIR}
-      - ../logs/php:${PHP_ROOT_DIR}/logs
+      - ./htdocs:${PHP_APP_DIR}
+      - ./logs/php:${PHP_ROOT_DIR}/logs
     depends_on:
       - omeka_apache
       - omeka_maria
     links:
       - omeka_maria
-      - omeka_solr
     networks:
       public_net:
         ipv4_address: ${PHP_IP}
