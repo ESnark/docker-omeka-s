@@ -37,3 +37,12 @@ host     = omeka_maria_con
 ;port     = 
 ;unix_socket =
 ;log_path = ' > ${dir}/htdocs/config/database.ini
+
+chmod -R 777 ${dir}/htdocs/files
+chmod -R 777 ${dir}/htdocs/modules
+chmod -R 777 ${dir}/htdocs/themes
+
+cd ${dir}/htdocs/modules
+wget https://github.com/Daniel-KM/Omeka-S-module-EasyInstall/releases/download/3.2.3/EasyInstall.zip
+unzip EasyInstall.zip
+rm EasyInstall.zip

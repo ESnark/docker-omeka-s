@@ -4,7 +4,7 @@ ARG WEB_USER
 ARG WEB_GROUP
 ARG PHP_ROOT_DIR
 
-RUN apk add --update re2c freetype-dev libpng-dev libjpeg-turbo-dev libxml2-dev autoconf g++ imagemagick imagemagick-dev curl-dev libtool make \
+RUN apk add --update unzip re2c freetype-dev libpng-dev libjpeg-turbo-dev libxml2-dev autoconf g++ imagemagick imagemagick-dev curl-dev libtool make \
 	&& docker-php-ext-configure gd \
 	--with-gd \
 	--with-freetype-dir=/usr/include/ \
